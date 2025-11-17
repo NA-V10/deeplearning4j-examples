@@ -17,6 +17,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+   // LeNetMNISTReLu.java
+  // Same as LeNetMNIST but uses ReLU activation instead of Tanh.
+
+
 package org.deeplearning4j.examples.quickstart.modeling.convolution;
 
 import org.datavec.api.io.labels.ParentPathLabelGenerator;
