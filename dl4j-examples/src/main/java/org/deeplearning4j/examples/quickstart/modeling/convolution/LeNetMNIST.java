@@ -17,6 +17,12 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+ // LeNetMNIST.java
+ // Classic LeNet-style CNN for MNIST digit classification.
+ // Expected accuracy: 98–99%.
+ // MNIST images: 28x28 grayscale (1 channel).
+
+
 package org.deeplearning4j.examples.quickstart.modeling.convolution;
 
 import org.apache.commons.io.FilenameUtils;
@@ -63,6 +69,10 @@ public class LeNetMNIST {
             Construct the neural network
          */
         log.info("Build model....");
+
+        // Build LeNet CNN architecture:
+       // Conv → Pool → Conv → Pool → Dense → Output
+
 
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
                 .seed(seed)
@@ -116,7 +126,9 @@ public class LeNetMNIST {
 
         MultiLayerNetwork model = new MultiLayerNetwork(conf);
         model.init();
-
+        
+        // Evaluate the model at the end of each epoch using EvaluativeListener
+        
         log.info("Train model...");
         model.setListeners(new ScoreIterationListener(10), new EvaluativeListener(mnistTest, 1, InvocationType.EPOCH_END)); //Print score every 10 iterations and evaluate on test set every epoch
         model.fit(mnistTrain, nEpochs);
