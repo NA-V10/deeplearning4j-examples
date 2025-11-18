@@ -17,6 +17,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+
+ // UCISequenceClassification.java
+// Demonstrates sequence classification using an RNN on UCI dataset sequences.
+
 package org.deeplearning4j.examples.quickstart.modeling.recurrent;
 
 import org.apache.commons.io.FileUtils;
