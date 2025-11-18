@@ -17,6 +17,11 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+
+  // ModelXOR.java
+ // Demonstrates solving the XOR problem using a small MLP.
+// XOR is not linearly separable -> requires hidden layers.
+
 package org.deeplearning4j.examples.quickstart.modeling.feedforward.classification;
 
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
@@ -109,6 +114,9 @@ public class ModelXOR {
         DataSet ds = new DataSet(input, labels);
 
         log.info("Network configuration and training...");
+
+        // Build a small 2-layer MLP for XOR classification
+
 
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
             .updater(new Sgd(0.1))
