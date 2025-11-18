@@ -17,6 +17,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+  // VaeMNIST2dPlots.java
+ // Trains a Variational Autoencoder (VAE) on MNIST and visualizes the 2D latent space.
+// Shows how VAEs compress images into smooth, continuous latent variables.
+
 package org.deeplearning4j.examples.quickstart.modeling.variationalautoencoder;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
@@ -98,10 +102,13 @@ public class VaeMNIST2dPlots {
         MultiLayerNetwork net = new MultiLayerNetwork(conf);
         net.init();
 
+        // Build a VAE with a 2-dimensional latent space for visualization
+
         //Get the variational autoencoder layer
         org.deeplearning4j.nn.layers.variational.VariationalAutoencoder vae
             = (org.deeplearning4j.nn.layers.variational.VariationalAutoencoder) net.getLayer(0);
 
+         
 
         //Test data for plotting
         DataSet testdata = new MnistDataSetIterator(10000, false, rngSeed).next();
@@ -121,11 +128,14 @@ public class VaeMNIST2dPlots {
         // (b) collect the reconstructions at each point in the grid
         net.setListeners(new PlottingListener(100, testFeatures, latentSpaceGrid, latentSpaceVsEpoch, digitsGrid));
 
-        //Perform training
+         //Perform training
+        // Train the VAE to encode and reconstruct MNIST digits
         for (int i = 0; i < nEpochs; i++) {
             log.info("Starting epoch {} of {}",(i+1),nEpochs);
             net.pretrain(trainIter);    //Note use of .pretrain(DataSetIterator) not fit(DataSetIterator) for unsupervised training
         }
+
+        // Visualize how different digit classes cluster in the latent space
 
         //plot by default
         if (visualize) {

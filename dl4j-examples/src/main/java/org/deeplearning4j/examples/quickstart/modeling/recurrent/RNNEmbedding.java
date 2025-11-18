@@ -17,6 +17,11 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+
+  // RNNEmbedding.java
+ // Demonstrates how to use an EmbeddingLayer + RNN layers for sequence modeling.
+// Useful for NLP-style integer token inputs.
+
 package org.deeplearning4j.examples.quickstart.modeling.recurrent;
 
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
@@ -45,6 +50,9 @@ import java.util.Random;
  *
  * @author Alex Black
  */
+
+ // Convert integer token IDs into dense embedding vectors
+
 public class RNNEmbedding {
     public static void main(String[] args) {
 
@@ -63,6 +71,10 @@ public class RNNEmbedding {
                 outLabels.putScalar(new int[]{i, labelIdx, j}, 1.0);
             }
         }
+
+        
+      // Feed embedded vectors into an LSTM/RNN to capture sequence structure
+
 
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
             .activation(Activation.RELU)

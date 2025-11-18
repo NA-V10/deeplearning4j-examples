@@ -17,6 +17,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+  // VaeMNISTAnomaly.java
+ // Demonstrates anomaly detection using a Variational Autoencoder (VAE).
+// Normal digits reconstruct well, anomalies reconstruct poorly.
+
 package org.deeplearning4j.examples.quickstart.modeling.variationalautoencoder;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
@@ -94,6 +98,9 @@ public class VaeMNISTAnomaly {
                 .build())
             .build();
 
+            // Load trained VAE model and MNIST test data
+
+
         MultiLayerNetwork net = new MultiLayerNetwork(conf);
         net.init();
 
@@ -150,6 +157,10 @@ public class VaeMNISTAnomaly {
         for(List<Pair<Double, INDArray>> list : listsByDigit.values()){
             Collections.sort(list, c);
         }
+
+         // Compute reconstruction probability for each test image
+        // Low probability indicates an anomaly
+    
 
         //Select the 5 best and 5 worst numbers (by reconstruction probability) for each digit
         List<INDArray> best = new ArrayList<>(50);

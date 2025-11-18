@@ -17,6 +17,10 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+  // MemorizeSequence.java
+ // A simple RNN example where the network learns to memorize and reproduce a short sequence.
+// Demonstrates basic RNN training and backpropagation-through-time.
+
 package org.deeplearning4j.examples.quickstart.modeling.recurrent;
 
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
@@ -87,6 +91,8 @@ public class MemorizeSequence {
 			hiddenLayerBuilder.activation(Activation.TANH);
 			listBuilder.layer(i, hiddenLayerBuilder.build());
 		}
+   
+		// Build a simple RNN with one recurrent layer to memorize the sequence
 
 		// we need to use RnnOutputLayer for our RNN
 		RnnOutputLayer.Builder outputLayerBuilder = new RnnOutputLayer.Builder(LossFunction.MCXENT);
@@ -96,7 +102,8 @@ public class MemorizeSequence {
 		outputLayerBuilder.nIn(HIDDEN_LAYER_WIDTH);
 		outputLayerBuilder.nOut(LEARNSTRING_CHARS.size());
 		listBuilder.layer(HIDDEN_LAYER_CONT, outputLayerBuilder.build());
-
+        
+		
 		// create network
 		MultiLayerConfiguration conf = listBuilder.build();
 		MultiLayerNetwork net = new MultiLayerNetwork(conf);
@@ -122,6 +129,9 @@ public class MemorizeSequence {
 			labels.putScalar(new int[] { 0, LEARNSTRING_CHARS_LIST.indexOf(nextChar), samplePos }, 1);
 			samplePos++;
 		}
+
+		// Train the RNN to output the same sequence it receives as input
+
 		DataSet trainingData = new DataSet(input, labels);
 
 		// some epochs
