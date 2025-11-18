@@ -17,6 +17,11 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+
+   // MNISTSingleLayer.java
+  // Simple single-hidden-layer MLP for MNIST digit classification.
+ // Demonstrates basic feedforward networks in DL4J.
+
 package org.deeplearning4j.examples.quickstart.modeling.feedforward.classification;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
@@ -72,6 +77,9 @@ public class MNISTSingleLayer {
 
 
         log.info("Build model....");
+
+        // Build a single-hidden-layer MLP for MNIST (28x28 images flattened to 784 inputs)
+
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
                 .seed(rngSeed) //include a random seed for reproducibility
                 // use stochastic gradient descent as an optimization algorithm
@@ -100,6 +108,7 @@ public class MNISTSingleLayer {
         log.info("Train model....");
         model.fit(mnistTrain, numEpochs);
 
+         // Evaluate the model on the MNIST test dataset
 
         log.info("Evaluate model....");
         Evaluation eval = model.evaluate(mnistTest);

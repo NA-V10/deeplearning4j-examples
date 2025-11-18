@@ -17,6 +17,11 @@
  * SPDX-License-Identifier: Apache-2.0
  ******************************************************************************/
 
+
+  // MNISTAutoencoder.java
+ // Demonstrates training an autoencoder on MNIST digit images.
+// Autoencoders learn compressed representations (unsupervised learning).
+
 package org.deeplearning4j.examples.quickstart.modeling.feedforward.unsupervised;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -81,6 +86,8 @@ public class MNISTAutoencoder {
                         .build())
                 .build();
 
+                // Build a simple autoencoder: Encoder → Bottleneck → Decoder
+
         MultiLayerNetwork net = new MultiLayerNetwork(conf);
         net.setListeners(Collections.singletonList(new ScoreIterationListener(10)));
 
@@ -101,6 +108,8 @@ public class MNISTAutoencoder {
             INDArray indexes = Nd4j.argMax(dsTest.getLabels(),1); //Convert from one-hot representation -> index
             labelsTest.add(indexes);
         }
+         
+        // Train the autoencoder to minimize reconstruction loss
 
         //Train model:
         int nEpochs = 3;
@@ -154,8 +163,10 @@ public class MNISTAutoencoder {
                 worst.add(list.get(list.size()-j-1).getRight());
             }
         }
+ 
+         //Visualize by default
+        // Evaluate reconstruction quality or print sample reconstructions
 
-        //Visualize by default
         if (visualize) {
             //Visualize the best and worst digits
             MNISTVisualizer bestVisualizer = new MNISTVisualizer(2.0, best, "Best (Low Rec. Error)");
